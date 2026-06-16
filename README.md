@@ -18,6 +18,6 @@ npm run dev
 ## SonarCloud
 
 Organization: `robin-vidal`
-Project key: `robin-vidal_url-shortener-backend`
+Project key: `robin-vidal_url-shortener-frontend`
 
 Required GitHub secret: `SONAR_TOKEN`.

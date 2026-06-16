@@ -1,39 +1,184 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 body {
-  font-family: sans-serif;
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 0 1rem;
+  background: #000;
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  overflow: hidden;
+  height: 100vh;
 }
 
-form {
+.bg-canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.ui {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
   display: flex;
-  gap: 0.5rem;
-  margin-bottom: 1.5rem;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
 }
 
-input[type="url"] {
-  flex: 1;
-  padding: 0.5rem;
-  font-size: 1rem;
-}
-
-button {
-  padding: 0.5rem 1rem;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-table {
+.panel {
   width: 100%;
-  border-collapse: collapse;
+  max-width: 520px;
+  max-height: 90vh;
+  overflow-y: auto;
+  scrollbar-width: none;
+  background: rgba(5, 5, 20, 0.65);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 2.5rem 2rem;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  box-shadow: 0 8px 60px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
-th, td {
-  text-align: left;
-  padding: 0.5rem;
-  border-bottom: 1px solid #ddd;
+header { margin-bottom: 2rem; text-align: center; }
+
+.logo {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: 0.2em;
+  background: linear-gradient(135deg, #fff 0%, #90d5ff 50%, #6366f1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.4rem;
 }
 
-.error {
-  color: red;
+header p {
+  color: rgba(255,255,255,0.35);
+  font-size: 0.82rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
 }
+
+.form {
+  display: flex;
+  gap: 6px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 14px;
+  padding: 5px;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form:focus-within {
+  border-color: rgba(100,200,255,0.35);
+  box-shadow: 0 0 0 3px rgba(80,160,255,0.08);
+}
+
+.form.loading {
+  border-color: rgba(100,240,255,0.5);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,100% { box-shadow: 0 0 20px rgba(80,220,255,0.15); }
+  50%      { box-shadow: 0 0 40px rgba(80,220,255,0.35); }
+}
+
+.form input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 0.9rem;
+  padding: 0.65rem 0.75rem;
+  min-width: 0;
+}
+
+.form input::placeholder { color: rgba(255,255,255,0.2); }
+.form input:disabled { opacity: 0.5; }
+
+.form button {
+  background: linear-gradient(135deg, #3b82f6, #6366f1);
+  border: none;
+  border-radius: 9px;
+  color: #fff;
+  font-size: 1.2rem;
+  width: 42px;
+  height: 42px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity 0.2s, transform 0.15s;
+}
+
+.form button:hover:not(:disabled) { opacity: 0.85; transform: scale(1.06); }
+.form button:disabled { opacity: 0.35; cursor: default; }
+
+.spinner {
+  width: 14px; height: 14px;
+  border: 2px solid rgba(255,255,255,0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: block;
+}
+
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.error { color: #f87171; font-size: 0.82rem; margin-bottom: 1rem; }
+
+.links { display: flex; flex-direction: column; gap: 0.5rem; }
+
+.link-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  transition: background 0.2s;
+}
+
+.link-card:hover { background: rgba(255,255,255,0.07); }
+
+.short {
+  display: block;
+  color: #7dd3fc;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  margin-bottom: 0.25rem;
+}
+
+.short:hover { color: #bae6fd; }
+
+.original {
+  display: block;
+  color: rgba(255,255,255,0.3);
+  font-size: 0.78rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-bottom: 0.5rem;
+}
+
+.link-meta { display: flex; align-items: center; justify-content: space-between; }
+
+.clicks { color: rgba(255,255,255,0.2); font-size: 0.75rem; }
+
+.copy {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 6px;
+  color: rgba(255,255,255,0.5);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.55rem;
+  cursor: pointer;
+  transition: all 0.15s;
+}
+
+.copy:hover { background: rgba(255,255,255,0.14); color: #fff; }

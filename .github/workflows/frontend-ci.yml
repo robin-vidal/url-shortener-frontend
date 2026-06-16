@@ -28,3 +28,9 @@ jobs:
         run: npm run build
         env:
           VITE_API_URL: http://localhost:8000
+
+      - name: SonarCloud scan
+        uses: SonarSource/sonarcloud-github-action@v3.1.0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}

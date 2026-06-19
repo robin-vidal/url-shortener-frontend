@@ -116,7 +116,7 @@ export default function App() {
   }
 
   const copy = code => {
-    navigator.clipboard.writeText(`${API}/${code}`)
+    navigator.clipboard.writeText(`${window.location.origin}/r/${code}`)
     setCopied(code)
     setTimeout(() => setCopied(null), 2000)
   }
@@ -151,8 +151,8 @@ export default function App() {
             <div className="links">
               {urls.map(u => (
                 <div key={u.id} className="link-card">
-                  <a className="short" href={`${API}/${u.code}`} target="_blank" rel="noreferrer">
-                    /{u.code}
+                  <a className="short" href={`/r/${u.code}`} target="_blank" rel="noreferrer">
+                    /r/{u.code}
                   </a>
                   <span className="original">{u.original}</span>
                   <div className="link-meta">
